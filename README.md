@@ -20,4 +20,3 @@ Have passed the exam and further learning, possibly DevOps
 - [ ] ☁️ 2 > [](Journey/002/Readme.md)
 
 
-

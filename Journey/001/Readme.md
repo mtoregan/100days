@@ -12,6 +12,24 @@
 
 ✍️ (What) Explain in one or two sentences the base knowledge a reader would need before describing the the details of the cloud service or topic.
 
+
+az group create \
+    --name my100DaysBatchResourceGroup \
+    --location northeurope
+
+az storage account create \
+    --resource-group my100DaysBatchResourceGroup \
+    --name my100daysstorageaccount \
+    --location northeurope \
+    --sku Standard_LRS
+
+
+az batch account create \
+    --name my100daysbatchaccount \
+    --storage-account my100daysstorageaccount \
+    --resource-group my100DaysBatchResourceGroup \
+    --location northeurope
+
 ## Run batch 
 
 - 🖼️ (Show-Me) Create an graphic or diagram that illustrate the use-case of how this knowledge could be applied to real-world project
