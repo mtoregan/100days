@@ -1,8 +1,7 @@
 **Add a cover photo like:**
 
-
 <p align="center">
-  <img src="Assets/Images/banner.png">
+  <img src="/Assets/Images/banner.png">
 </p>
 
 
