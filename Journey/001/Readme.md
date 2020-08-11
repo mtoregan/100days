@@ -12,7 +12,7 @@
 
 ✍️ (What) Explain in one or two sentences the base knowledge a reader would need before describing the the details of the cloud service or topic.
 
-
+```shell
 az group create \
     --name my100DaysBatchResourceGroup \
     --location northeurope
@@ -29,6 +29,7 @@ az batch account create \
     --storage-account my100daysstorageaccount \
     --resource-group my100DaysBatchResourceGroup \
     --location northeurope
+```
 
 ## Run batch 
 
