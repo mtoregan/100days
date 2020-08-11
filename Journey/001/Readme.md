@@ -6,14 +6,16 @@
 
 ## Introduction
 
-✍️ (Why) Explain in one or two sentences why you choose to do this project or cloud topic for your day's study.
+(Why) Explain in one or two sentences why you choose to do this project or cloud topic for your day's study.
 
 ## Create batch 
 
-✍️ (What) Explain in one or two sentences the base knowledge a reader would need before describing the the details of the cloud service or topic.
+ (What) Explain in one or two sentences the base knowledge a reader would need before describing the the details of the cloud service or topic.
 - One 
 - Two 
 - Three 
+
+> update 
 
 ```shell
 az group create \
