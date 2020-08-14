@@ -53,6 +53,8 @@ az batch account login \
 
 ### Pool, Job and Tasks 
 
+Create the pool and the VM image that used within the pool. 
+
 ```shell
 az batch pool create \
     --id mypool --vm-size Standard_A1_v2 \
@@ -60,18 +62,20 @@ az batch pool create \
     --image canonical:ubuntuserver:16.04-LTS \
     --node-agent-sku-id "batch.node.ubuntu 16.04" 
 ```
-
+Get the status of the VMs being created in last step. 
 ```shell
 az batch pool show --pool-id mypool \
     --query "allocationState"
 ```
 
+Create a job for the newwly create pool.
 ```shell
   az batch job create \
     --id myjob \
     --pool-id mypool
 ```
 
+Finally create 4 tasks for the job and run them. The jobs will be ran in paralel, with 2 jobs running on each VM one after the other.  
 ```shell
 for i in {1..4}
 do
@@ -82,49 +86,13 @@ do
 done
 ```
 
+Clean up!
 
+```shell
 az batch pool delete --pool-id mypool
 az group delete --name myResourceGroup
-
-
-https://docs.microsoft.com/en-us/azure/batch/quick-create-cli
-
 ```
 
-## Run batch 
+## References 
 
-- 🖼️ (Show-Me) Create an graphic or diagram that illustrate the use-case of how this knowledge could be applied to real-world project
-- ✍️ (Show-Me) Explain in one or two sentences the use case
-
-## View Results 
-
-## Cloud Research
-
-- ✍️ Document your trial and errors. Share what you tried to learn and understand about the cloud topic or while completing micro-project.
-- 🖼️ Show as many screenshot as possible so others can experience in your cloud research.
-
-### Step 1 — Summary of Step
-
-![Screenshot](https://via.placeholder.com/500x300)
-
-### Step 1 — Summary of Step
-
-![Screenshot](https://via.placeholder.com/500x300)
-
-### Step 3 — Summary of Step
-
-![Screenshot](https://via.placeholder.com/500x300)
-
-## ☁️ Cloud Outcome
-
-✍️ (Result) Describe your personal outcome, and lessons learned.
-
-## Next Steps
-
-✍️ Describe what you think you think you want to do next.
-
-## Social Proof
-
-✍️ Show that you shared your process on Twitter or LinkedIn
-
-[link](link)
+[Microsoft Documents for Batch ](https://docs.microsoft.com/en-us/azure/batch/quick-create-cli) 
