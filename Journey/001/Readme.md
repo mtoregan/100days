@@ -27,7 +27,7 @@ az group create \
     --name my100DaysBatchResourceGroup \
     --location northeurope
 ```
-Create a storage account in the resource group 
+Create a storage account within the resource group. 
 ```shell
 az storage account create \
     --resource-group my100DaysBatchResourceGroup \
@@ -36,7 +36,6 @@ az storage account create \
     --sku Standard_LRS
 ```
 Create a batch storage account for the previously created storage. 
-
 ```shell
 az batch account create \
     --name my100daysbatchaccount \
@@ -44,6 +43,7 @@ az batch account create \
     --resource-group my100DaysBatchResourceGroup \
     --location northeurope
 ```
+Give the Batch storage account access. 
 ```shell
 az batch account login \
     --name my100daysbatchaccount \
@@ -52,27 +52,27 @@ az batch account login \
 ```
 
 ### Pool, Job and Tasks 
+
 ```shell
-#create pool 
 az batch pool create \
     --id mypool --vm-size Standard_A1_v2 \
     --target-dedicated-nodes 2 \
     --image canonical:ubuntuserver:16.04-LTS \
     --node-agent-sku-id "batch.node.ubuntu 16.04" 
+```
 
-#view ceation
-
+```shell
 az batch pool show --pool-id mypool \
     --query "allocationState"
+```
 
-  #job 
-
+```shell
   az batch job create \
     --id myjob \
     --pool-id mypool
+```
 
-  #tasks 
-
+```shell
   for i in {1..4}
 do
    az batch task create \
@@ -80,8 +80,8 @@ do
     --job-id myjob \
     --command-line "/bin/bash -c 'printenv | grep AZ_BATCH; sleep 90s'"
 done
+```
 
-#cl;ean up 
 
 az batch pool delete --pool-id mypool
 az group delete --name myResourceGroup
