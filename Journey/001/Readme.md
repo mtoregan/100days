@@ -1,20 +1,23 @@
-<p align="center">
-  <img src="/Assets/Images/banner.png">
-</p>
+# Introduction
+Batch has been rescently added to the AZ 203 exam and here is a summary of what might be expected to appear on the exam. 
 
-# AZ 203 - Batch 
+## Batch
+Use Azure Batch to run large-scale parallel and high-performance computing (HPC) batch jobs efficiently in Azure. Azure Batch creates and manages a pool of compute nodes (virtual machines), installs the applications you want to run, and schedules jobs to run on the nodes. There's no cluster or job scheduler software to install, manage, or scale. Instead, you use Batch APIs and tools, command-line scripts, or the Azure portal to configure, manage, and monitor your jobs.
 
-## Introduction
+## Steps 
+These are the steps that are required to be taken to setup a batch  
 
-(Why) Explain in one or two sentences why you choose to do this project or cloud topic for your day's study.
+- Create a Resource Goup  
+- Create a Staroage account  
+- Create a batch account 
+- Give batch account login rights 
+- Create a batch Pool 
+- Create a Job 
+- Create Tasks 
+- Review output 
+
 
 ## Create batch 
-
- (What) Explain in one or two sentences the base knowledge a reader would need before describing the the details of the cloud service or topic.
-- One 
-- Two 
-- Three 
-
 > update 
 
 ```shell
@@ -34,6 +37,48 @@ az batch account create \
     --storage-account my100daysstorageaccount \
     --resource-group my100DaysBatchResourceGroup \
     --location northeurope
+
+az batch account login \
+    --name my100daysbatchaccount \
+    --resource-group my100DaysBatchResourceGroup \
+    --shared-key-auth
+
+#create pool 
+az batch pool create \
+    --id mypool --vm-size Standard_A1_v2 \
+    --target-dedicated-nodes 2 \
+    --image canonical:ubuntuserver:16.04-LTS \
+    --node-agent-sku-id "batch.node.ubuntu 16.04" 
+
+#view ceation
+
+az batch pool show --pool-id mypool \
+    --query "allocationState"
+
+  #job 
+
+  az batch job create \
+    --id myjob \
+    --pool-id mypool
+
+  #tasks 
+
+  for i in {1..4}
+do
+   az batch task create \
+    --task-id mytask$i \
+    --job-id myjob \
+    --command-line "/bin/bash -c 'printenv | grep AZ_BATCH; sleep 90s'"
+done
+
+#cl;ean up 
+
+az batch pool delete --pool-id mypool
+az group delete --name myResourceGroup
+
+
+https://docs.microsoft.com/en-us/azure/batch/quick-create-cli
+
 ```
 
 ## Run batch 
